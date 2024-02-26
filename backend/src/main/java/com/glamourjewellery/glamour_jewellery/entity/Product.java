@@ -27,7 +27,7 @@ public class Product {
     @Column(name = "product_price", nullable = false)
     private Double productPrice;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "category", nullable = false)
     private String productCategory;
 
     @Column(name = "description", nullable = true)

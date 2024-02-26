@@ -80,6 +80,7 @@ export const userAuthService = () => {
         setToken(response.data.data.token);
         setLocalStorageItem("token", response.data.data.token);
         setLocalStorageItem("id", response.data.data.userId);
+        setLocalStorageItem("role", response.data.data.role);
       }
     } catch (error) {
       setLoading(false);
@@ -96,6 +97,7 @@ export const userAuthService = () => {
 
     localStorage.removeItem("token");
     localStorage.removeItem("id");
+    localStorage.removeItem("role");
 
     setToken(null);
     navigate("/home");

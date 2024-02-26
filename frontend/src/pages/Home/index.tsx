@@ -11,6 +11,7 @@ export const Home = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);

@@ -20,8 +20,9 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping(value = "/save")
-    public String saveProduct(@RequestBody ProductPojo productPojo) throws IOException {
-        return productService.save(productPojo);
+    public String saveProduct(@RequestBody @ModelAttribute ProductPojo productPojo) throws IOException {
+        productService.save(productPojo);
+        return "Saved Successful";
     }
 
     @GetMapping("/getAll")

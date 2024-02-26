@@ -11,7 +11,9 @@ import styles from "./style.module.css";
 export const Header = () => {
 
   const { token } = useAuthContext();
+  const role = localStorage.getItem("role");
 
+  console.log('Role::',role);
 
   return (
     <header className={`${styles.header} container-padding`}>
@@ -29,6 +31,9 @@ export const Header = () => {
               <Link to="/profile">
                 <AiOutlineUser />
               </Link>
+              {role === "Admin" && (
+                  <Link to="/add-product">Add Product</Link>
+              )}
             </>
             :
             <>

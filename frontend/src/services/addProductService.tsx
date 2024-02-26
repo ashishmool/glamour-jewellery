@@ -20,7 +20,9 @@ export const addProductService = () => {
 
     try {
 
-      await api.post(`http://localhost:8080/product/save`, data, {
+      console.log('service data:::',data);
+
+      await api.post(`product/save`, data, {
         headers: {Authorization:"Bearer "+token}
       });
 

@@ -5,7 +5,9 @@ export type ProductType = {
   productCategory?: string;
   productImageUrl?: string;
   productDescription?: string;
-  posts?: CommentsType[];
+  stockQuantity?: number;
+  productAvailability?: boolean;
+  // posts?: CommentsType[];
 }
 
 type CommentsType = {

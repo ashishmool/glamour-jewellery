@@ -11,6 +11,8 @@ import { ProductType } from '../../interfaces/Products';
 import { addProductService } from '../../services/addProductService';
 
 import styles from "./style.module.css";
+import {useAuthContext} from "../../hooks/useAuthContext";
+import {api} from "../../services/api";
 
 export const AddProductForm = () => {
     const { addProduct, loading, error } = addProductService();
@@ -22,26 +24,41 @@ export const AddProductForm = () => {
     const [productDescription, setProductDescription] = useState<string>("");
     const [image, setImage] = useState(null); // State variable to hold the image file
 
+    const [stockQuantity, setStockQuantity] = useState<number>(0);
+
+    const { token } = useAuthContext();
+
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const data: ProductType = {
-            productName,
-            productPrice: parseFloat(productPrice),
-            productCategory,
-            productImageUrl,
-            productDescription,
-        };
+        const formData = new FormData();
+        formData.append('productName', productName);
+        formData.append('productPrice', parseFloat(productPrice).toString());
+        formData.append('productCategory', productCategory);
+        formData.append('productDescription', productDescription);
+        formData.append('stockQuantity', stockQuantity.toString());
+        formData.append('image', image); // Append the image file to the FormData
 
-        await addProduct(data);
+        try {
+            // Send POST request with FormData
+            await api.post(`product/save`, formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data', // Set content type to multipart/form-data for file upload
+                }
+            });
 
-        if (!error) {
+            // Reset form fields on success
             setProductName("");
             setProductPrice("");
-            setProductImageUrl("");
+            setProductCategory("");
             setProductDescription("");
+            setStockQuantity(0);
             setImage(null);
+        } catch (error) {
+            console.error('Error adding product:', error);
+            // setError("Failed to add product. Please try again later.");
         }
     }
 
