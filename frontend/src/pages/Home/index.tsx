@@ -61,19 +61,19 @@ export const Home = () => {
 
                 {error && <ErrorMessage className="text-center" message={error} />}
                 {products.length > 0 ? (
-                    <>
+                    <div className={styles.productsContainer}>
                         {products.map((product, index) => (
-                            <ProductCard
-                                key={index}
-                                productId={product.productId} // Pass the productId prop here
-                                productCategory={product.productCategory}
-                                productName={product.productName}
-                                productImageUrl={product.productImageUrl}
-                                productPrice={product.productPrice}
-                            />
+                            <div key={index} className={`${styles.productCardWrapper} ${styles.productCardSpacing}`}>
+                                <ProductCard
+                                    productId={product.productId}
+                                    productCategory={product.productCategory}
+                                    productName={product.productName}
+                                    productImageUrl={product.image}
+                                    productPrice={product.productPrice}
+                                />
+                            </div>
                         ))}
-
-                    </>
+                    </div>
                 ) : (
                     <ErrorMessage
                         className="text-center"
@@ -82,5 +82,6 @@ export const Home = () => {
                 )}
             </section>
         </main>
+
     );
 };

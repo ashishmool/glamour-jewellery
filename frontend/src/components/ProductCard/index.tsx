@@ -19,7 +19,9 @@ export const ProductCard = ({ productId, productImageUrl, productName, productPr
             <p>{productCategory}</p>
         </div>
       <div className={styles.imageContainer}>
-        <img src={productImageUrl} alt={productName} />
+        {/*<img src={productImageUrl} alt={productName} />*/}
+          <img src={'data:image/png;base64,' + productImageUrl} />
+
       </div>
       <div className={styles.productNameContainer}>
         <p>{productName}</p>
