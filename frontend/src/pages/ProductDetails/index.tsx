@@ -67,17 +67,18 @@ export const ProductDetails = () => {
         <section className={styles.flexContainer}>
           <div className={styles.productDetailsContainer}>
             <h3>{productDetails?.data.productName}</h3>
-            <p className={styles.price}>
-              {moneyFormatter(productDetails?.data.productPrice)}
+            <p className={styles.price}>Rs.
+              {(productDetails?.data.productPrice)}/-
             </p>
             <p>{productDetails?.data.productDescription}</p>
           </div>
           <div className={styles.productImageContainer}>
-            <img src={productDetails?.data.productImageUrl} alt={productDetails?.data.productName} />
+            {/*<img src={productDetails?.data.productImageUrl} alt={productDetails?.data.productName} />*/}
+            <img src={'data:image/png;base64,' + productDetails?.data.productImageUrl} alt={productDetails?.data.productName} />
           </div>
         </section>
         <section className={styles.commentsSection}>
-          <h2>Comentários</h2>
+          <h2>Any Comments?</h2>
           <div className={styles.commentsContainer}>
             {productDetails?.data.posts?.length == 0 && (
               <p className={styles.noReviewsMessage}>This product has no reviews, be the first one!</p>

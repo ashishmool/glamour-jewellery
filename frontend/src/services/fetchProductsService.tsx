@@ -18,14 +18,14 @@ export const fetchProductsService = () => {
 
     try {
 
-      const response: any = await api.get(`product/getAll`);
-
-      // setProducts(response);
-      console.log('Fetched Products:::',response.data);
+      const response: any = await api.get(`http://localhost:8080/product/getAll`);
+      setProducts(response.data);
+      console.log('Fetched Product Service:::',response.data);
 
     } catch (error) {
 
       setLoading(false);
+      console.log('Generic Error');
       setError(requestErrorMessages.genericError);
     }
 

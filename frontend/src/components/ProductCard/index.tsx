@@ -22,7 +22,7 @@ export const ProductCard = ({ productId, productImageUrl, productName, productPr
         <p>{productName}</p>
       </div>
       <div className={styles.priceContainer}>
-        <span>{moneyFormatter(productPrice)}</span>
+        <span>Rs.(productPrice)</span>
       </div>
     </div>
   );

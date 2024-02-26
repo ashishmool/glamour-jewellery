@@ -27,7 +27,7 @@ export const fetchProductDetailsService = () => {
 
     try {
 
-      const request = await api.get(`/product/getproductbyid?productId=${id}`);
+      const request = await api.get(`http://localhost:8080/product/getById/${id}`);
 
       if (token) {
 
