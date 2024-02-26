@@ -1,24 +1,39 @@
 import { useEffect, useState } from "react";
-import { fetchProductsService } from '../../services/fetchProductsService';
 import { PageTitle } from '../../components/PageTitle/index';
 import { ProductCard } from '../../components/ProductCard';
-import { Loading } from '../../components/Loding';
+import { Loading } from '../../components/Loading';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { BannerCarousel } from '../../components/BannerCarousel';
 import styles from "./style.module.css";
 
 export const Home = () => {
-    const { products, loading, error } = fetchProductsService();
-    const [fetchedProducts, setFetchedProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
-
-    console.log('setFetched',products);
     useEffect(() => {
-        if (products) {
-            setFetchedProducts(products);
+        const fetchProducts = async () => {
+            setLoading(true);
+            setError(null);
 
-        }
-    }, [products]);
+            try {
+                // Fetch products directly within the component
+                const response = await fetch('http://localhost:8080/product/getAll');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                setError('Failed to fetch products');
+            }
+
+            setLoading(false);
+        };
+
+        fetchProducts();
+    }, []);
 
     if (loading) {
         return (
@@ -36,32 +51,28 @@ export const Home = () => {
         );
     }
 
+    // Log fetched products before return statement
+    console.log('Fetched products:', products);
+
     return (
         <main className={`${styles.main} container-padding`}>
             <section className="max-width">
                 <BannerCarousel />
-                <ProductCard productName={"Earring"}/>
 
                 {error && <ErrorMessage className="text-center" message={error} />}
-                {fetchedProducts.length > 0 ? (
+                {products.length > 0 ? (
                     <>
-                        {fetchedProducts.map((item, index) => (
-                            <section key={index} className={styles.productsContainer}>
-                                <PageTitle title={item.categoryName} />
-                                <ul>
-                                    {item.products && item.products.map((product: any) => (
-                                        <li key={product.productId}>
-                                            <ProductCard
-                                                productId={product.productId}
-                                                productName={product.productName}
-                                                productImageUrl={product.productImageUrl}
-                                                productPrice={product.productPrice}
-                                            />
-                                        </li>
-                                    ))}
-                                </ul>
-                            </section>
+                        {products.map((product, index) => (
+                            <ProductCard
+                                key={index}
+                                productId={product.productId} // Pass the productId prop here
+                                productCategory={product.productCategory}
+                                productName={product.productName}
+                                productImageUrl={product.productImageUrl}
+                                productPrice={product.productPrice}
+                            />
                         ))}
+
                     </>
                 ) : (
                     <ErrorMessage

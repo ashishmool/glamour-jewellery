@@ -4,7 +4,7 @@ import { fetchUserDataService } from '../../services/fetchUserDataService';
 import { PageTitle } from "../../components/PageTitle";
 import { ProfileActions } from "../../components/ProfileActions";
 import { ErrorMessage } from '../../components/ErrorMessage';
-import { Loading } from '../../components/Loding';
+import { Loading } from '../../components/Loading';
 import { LogoutModal } from '../../components/LogoutModal';
 import styles from "./style.module.css";
 import {

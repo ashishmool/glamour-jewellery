@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { PageTitle } from "../../components/PageTitle";
 import { MiniProductCard } from '../../components/MiniProductCard/index';
 import { favoriteProductService } from "../../services/favoriteProductService";
-import { Loading } from "../../components/Loding";
+import { Loading } from "../../components/Loading";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import styles from "./stlye.module.css";
 

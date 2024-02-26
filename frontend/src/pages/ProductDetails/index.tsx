@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { Loading } from "../../components/Loding";
+import { Loading } from "../../components/Loading";
 import { ProductDetailsActions } from "../../components/ProductDetailsActions";
 import { fetchProductDetailsService } from "../../services/fetchProductDetailsService";
 import { moneyFormatter } from "../../utils/moneyFormatter";

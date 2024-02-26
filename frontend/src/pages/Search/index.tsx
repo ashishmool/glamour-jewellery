@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchProductsService } from "../../services/searchProductsService";
 import { ProductCard } from "../../components/ProductCard";
-import { Loading } from "../../components/Loding";
+import { Loading } from "../../components/Loading";
 import { PageTitle } from "../../components/PageTitle";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import styles from "./style.module.css";
