@@ -4,7 +4,7 @@ import { moneyFormatter } from "../../utils/moneyFormatter";
 import styles from "./style.module.css";
 
 
-export const ProductCard = ({ productId, productImageUrl, productName, productPrice }: ProductType) => {
+export const ProductCard = ({ productId, productImageUrl, productName, productPrice, productCategory }: ProductType) => {
 
   const navigate = useNavigate();
 
@@ -15,6 +15,9 @@ export const ProductCard = ({ productId, productImageUrl, productName, productPr
 
   return (
     <div className={styles.card} onClick={handleCard}>
+        <div className={styles.productCategory}>
+            <p>{productCategory}</p>
+        </div>
       <div className={styles.imageContainer}>
         <img src={productImageUrl} alt={productName} />
       </div>
