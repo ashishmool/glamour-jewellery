@@ -1,12 +1,11 @@
 package com.glamourjewellery.glamour_jewellery.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -14,6 +13,8 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Data
 public class Product {
 
     @Id
@@ -41,7 +42,13 @@ public class Product {
     @Column(name = "availability", nullable = true)
     private Boolean productAvailability;
 
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private List<CartItem> cartItems;
 
-
+    @Override
+    public String toString() {
+        return "Product Name: " + getProductName() + ", Price: " + getProductPrice();
+    }
 
 }

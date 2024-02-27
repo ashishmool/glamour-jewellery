@@ -14,6 +14,7 @@ import { Search } from "../pages/Search";
 import { WishList } from "../pages/WishList";
 import { Cart } from '../pages/Cart';
 import { Profile } from '../pages/Profile/index';
+import {ProductList} from "../components/AddProductForm/ProductList";
 
 
 export const AppRoutes = () => {
@@ -31,6 +32,7 @@ export const AppRoutes = () => {
         <Route path="/add-product" element={<PrivateRoute redirectTo="/login" />} >
           <Route path="/add-product" element={<AddProduct />} />
         </Route>
+        <Route path="/list-product" element={<ProductList />} />
         <Route path="/favorites" element={<PrivateRoute redirectTo="/login" />}>
           <Route path="/favorites" element={<WishList />} />
         </Route>
