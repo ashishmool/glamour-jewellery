@@ -37,8 +37,8 @@ export const AppRoutes = () => {
           <Route path="/add-product" element={<AddProduct />} />
         </Route>
 
-        <Route path="/update-product" element={<PrivateRoute redirectTo="/login" />} >
-          <Route path="/update-product" element={<UpdateProduct/>} />
+        <Route path="/update-product/:id" element={<PrivateRoute redirectTo="/login" />} >
+          <Route path="/update-product/:id" element={<UpdateProduct/>} />
         </Route>
 
         <Route path="/list-product" element={<PrivateRoute redirectTo="/login" />} >
