@@ -8,7 +8,7 @@ import { api } from "./api";
 
 export const fetchUserDataService = () => {
 
-  const userID = getLocalStorageItem("id");
+  const userID = getLocalStorageItem("id") || 0; // Set userID to 0 if it's null
 
 
   const { token } = useAuthContext();

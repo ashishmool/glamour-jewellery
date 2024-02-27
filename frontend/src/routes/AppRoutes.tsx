@@ -15,6 +15,8 @@ import { WishList } from "../pages/WishList";
 import { Cart } from '../pages/Cart';
 import { Profile } from '../pages/Profile/index';
 import {ProductList} from "../components/AddProductForm/ProductList";
+import {UpdateProduct} from "../pages/UpdateProduct";
+import {ToastContainer} from "react-toastify";
 
 
 export const AppRoutes = () => {
@@ -28,11 +30,21 @@ export const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/product-details/:productId" element={<ProductDetails />} />
         <Route path="/search" element={<Search />} />
+
+
         {/* PRIVATE ROUTES */}
         <Route path="/add-product" element={<PrivateRoute redirectTo="/login" />} >
           <Route path="/add-product" element={<AddProduct />} />
         </Route>
-        <Route path="/list-product" element={<ProductList />} />
+
+        <Route path="/update-product" element={<PrivateRoute redirectTo="/login" />} >
+          <Route path="/update-product" element={<UpdateProduct/>} />
+        </Route>
+
+        <Route path="/list-product" element={<PrivateRoute redirectTo="/login" />} >
+          <Route path="/list-product" element={<ProductList />} />
+        </Route>
+
         <Route path="/favorites" element={<PrivateRoute redirectTo="/login" />}>
           <Route path="/favorites" element={<WishList />} />
         </Route>
@@ -44,6 +56,9 @@ export const AppRoutes = () => {
         </Route>
       </Routes>
       <UserBenefitsSection />
+
+      <ToastContainer />
+
       <Footer />
     </BrowserRouter>
   );

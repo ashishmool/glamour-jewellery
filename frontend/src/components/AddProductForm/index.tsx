@@ -13,6 +13,7 @@ import { addProductService } from '../../services/addProductService';
 import styles from "./style.module.css";
 import {useAuthContext} from "../../hooks/useAuthContext";
 import {api} from "../../services/api";
+import {toast} from "react-toastify";
 
 export const AddProductForm = () => {
     const { addProduct, loading, error } = addProductService();
@@ -48,7 +49,7 @@ export const AddProductForm = () => {
                     'Content-Type': 'multipart/form-data', // Set content type to multipart/form-data for file upload
                 }
             });
-
+            toast.success("Product Added Successfully!");
             // Reset form fields on success
             setProductName("");
             setProductPrice("");
@@ -57,6 +58,7 @@ export const AddProductForm = () => {
             setStockQuantity(0);
             setImage(null);
         } catch (error) {
+            toast.error("Product Add Error! Ensure Image Filename is NOT a duplicate.");
             console.error('Error adding product:', error);
             // setError("Failed to add product. Please try again later.");
         }

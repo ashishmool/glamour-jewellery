@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../services/api';
 import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
+import {toast} from "react-toastify";
 
 
 export const ProductList = () => {
@@ -23,6 +24,7 @@ export const ProductList = () => {
     const handleDelete = async (productId) => {
         try {
             await api.delete(`product/delete/${productId}`);
+            toast.success("Deleted Successfully");
             fetchProducts(); // Refresh product list after deletion
         } catch (error) {
             console.error('Error deleting product:', error);
@@ -50,7 +52,7 @@ export const ProductList = () => {
                         <td style={{ border: '1px solid #ddd', padding: '8px' }}>{product.productCategory}</td>
                         <td style={{ border: '1px solid #ddd', padding: '8px', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.productDescription}</td>
                         <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'center' }}>
-                            <Link to={`/edit/${product.productId}`}>
+                            <Link to={`/update-product/${product.productId}`}>
                                 <AiFillEdit size={24} style={{ marginRight: '8px' }} />
                             </Link>
                             <button onClick={() => handleDelete(product.productId)}>

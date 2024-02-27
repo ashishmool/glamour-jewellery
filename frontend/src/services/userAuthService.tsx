@@ -6,6 +6,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { setLocalStorageItem } from '../utils/localStorageActions';
 import { api } from "./api";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 
 export const userAuthService = () => {
@@ -75,6 +76,7 @@ export const userAuthService = () => {
 
     try {
       const response = await axios.post("http://localhost:8080/authenticate", data);
+      toast.success("Logged In Successfully!");
       console.log("Token::", response.data.data.token);
       if (response.data && response.data.data.token) {
         setToken(response.data.data.token);
@@ -83,13 +85,14 @@ export const userAuthService = () => {
         setLocalStorageItem("role", response.data.data.role);
       }
     } catch (error) {
+      toast.error("Error! Please Try Again!!")
       setLoading(false);
       setError(requestErrorMessages.genericError);
       console.error("Error during login:", error);
     }
 
     setLoading(false);
-    navigate("/");
+    // navigate("/");
   }
 
 
