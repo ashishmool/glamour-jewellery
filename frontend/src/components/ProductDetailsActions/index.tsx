@@ -83,7 +83,7 @@ export const ProductDetailsActions = ({ productID, favoriteProducts, productsOnC
 
   return (
     <div className={`${styles.container} max-width`}>
-      <p>Product details</p>
+      <p>Product Details</p>
       <div className={styles.actions}>
         <button
           className={isProductAlreadyFavorited ? productFavorited : unfavoriteProduct}

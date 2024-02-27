@@ -34,7 +34,7 @@ export const TotalPriceBar = ({ totalPrice }: Props) => {
         <div className={`${styles.flexArea} max-width`}>
           <div className={styles.totalPriceContainer}>
             <p>Total Price:</p>
-            <span>{moneyFormatter(totalPrice)}</span>
+            <span>Rs.{totalPrice}</span>
           </div>
           <div className={styles.redirectContainer}>
             {totalPrice ?

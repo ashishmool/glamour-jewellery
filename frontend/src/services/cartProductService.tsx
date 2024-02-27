@@ -20,7 +20,7 @@ export const cartProductService = () => {
 
     try {
 
-      api.post(`user/addproducttocartlist?userId=${userID}&productId=${productID}`, {}, {
+      api.post(`user/addToCart/userId=${userID}&productId=${productID}`, {}, {
         headers: {
           "Authorization": token,
         }
@@ -34,7 +34,7 @@ export const cartProductService = () => {
 
     try {
 
-      api.delete(`user/deleteproductfromcartlist?userId=${userID}&productId=${productID}`, {
+      api.delete(`user/deleteFromCart/userId=${userID}&productId=${productID}`, {
         headers: {
           "Authorization": token,
         }
@@ -49,7 +49,7 @@ export const cartProductService = () => {
 
     try {
 
-      api.delete(`user/deleteallproductfromcartlist?userId=${userID}`, {
+      api.delete(`user/clearCart/userId=${userID}`, {
         headers: {
           "Authorization": token,
         }
@@ -66,14 +66,13 @@ export const cartProductService = () => {
 
     try {
 
-      const response: any = await api.get(`user/getcartlistfromuser?userId=${userID}`, {
+      const response: any = await api.get(`user/fetchCartItemsByUser/${userID}`, {
         headers: {
-          "Authorization": token,
-          "Access-Control-Allow-Origin": "*",
-        }
+          'Authorization': `Bearer ${token}`}
       });
 
       setProductsOnCart(response);
+      console.log('Fetched Cart Items:::',response);
 
     } catch (error) {
 

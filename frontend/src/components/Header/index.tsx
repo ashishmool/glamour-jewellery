@@ -2,7 +2,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
 import { SearchBar } from "../SearchBar";
 
-import { AiOutlineHeart, AiOutlineUserAdd, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineUserAdd, AiOutlineUser, AiOutlinePlus, AiOutlineUnorderedList } from "react-icons/ai";
 
 import Logo from "../../assets/logo.svg";
 import styles from "./style.module.css";
@@ -25,15 +25,21 @@ export const Header = () => {
         <div className={styles.actions}>
           {token ?
             <>
+              {role === "Admin" && (
+                  <Link to="/add-product"><AiOutlinePlus/></Link>
+              )}
+              {role === "Admin" && (
+                  <Link to="/list-product"> <AiOutlineUnorderedList/> </Link>
+              )}
+              {role === "Customer" && (
               <Link to="/favorites">
                 <AiOutlineHeart />
               </Link>
+              )}
               <Link to="/profile">
                 <AiOutlineUser />
               </Link>
-              {role === "Admin" && (
-                  <Link to="/add-product">Add Product</Link>
-              )}
+
             </>
             :
             <>

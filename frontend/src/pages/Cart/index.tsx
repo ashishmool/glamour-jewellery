@@ -11,7 +11,6 @@ import styles from "./stlye.module.css";
 export const Cart = () => {
 
   const { fetchProductsOnCart, productsOnCart, loading, error } = cartProductService();
-
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
 

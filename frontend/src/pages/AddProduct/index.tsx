@@ -7,7 +7,7 @@ export const AddProduct = () => {
   return (
     <main className="container-padding">
       <section className="max-width">
-        <PageTitle title="Add product" />
+        <PageTitle title="Add Product" />
         <div className={`${styles.container} gray-box`}>
           <AddProductForm />
         </div>

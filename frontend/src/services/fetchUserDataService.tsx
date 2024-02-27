@@ -10,6 +10,7 @@ export const fetchUserDataService = () => {
 
   const userID = getLocalStorageItem("id");
 
+
   const { token } = useAuthContext();
   const [userData, setUserData] = useState<UserDataType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,7 +24,7 @@ export const fetchUserDataService = () => {
 
     try {
 
-      const response: any = await api.get(`http://localhost:8080/getById/${userID}`, {
+      const response: any = await api.get(`http://localhost:8080/system-user/getById/${userID}`, {
         headers: {Authorization:"Bearer "+token}
       });
 
