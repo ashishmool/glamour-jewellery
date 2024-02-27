@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../services/api';
+import { AiFillEdit, AiTwotoneDelete } from "react-icons/ai";
+
 
 export const ProductList = () => {
     const [products, setProducts] = useState([]);
@@ -28,30 +30,32 @@ export const ProductList = () => {
     };
 
     return (
-        <div>
+        <div style={{ width: '80%', margin: '0 auto' }}>
             <h2>Product List</h2>
-            <table>
+            <table style={{ borderCollapse: 'collapse', width: '100%' }}>
                 <thead>
                 <tr>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Actions</th>
+                    <th style={{ border: '1px solid #ddd', padding: '8px' }}>Product Name</th>
+                    <th style={{ border: '1px solid #ddd', padding: '8px' }}>Price</th>
+                    <th style={{ border: '1px solid #ddd', padding: '8px' }}>Category</th>
+                    <th style={{ border: '1px solid #ddd', padding: '8px', maxWidth: '200px' }}>Description</th>
+                    <th style={{ border: '1px solid #ddd', padding: '8px' }}>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {products.map((product) => (
                     <tr key={product.productId}>
-                        <td>{product.productName}</td>
-                        <td>{product.productPrice}</td>
-                        <td>{product.productCategory}</td>
-                        <td>{product.productDescription}</td>
-                        <td>
+                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>{product.productName}</td>
+                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>{product.productPrice}</td>
+                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>{product.productCategory}</td>
+                        <td style={{ border: '1px solid #ddd', padding: '8px', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.productDescription}</td>
+                        <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'center' }}>
                             <Link to={`/edit/${product.productId}`}>
-                                <button>Edit</button>
+                                <AiFillEdit size={24} style={{ marginRight: '8px' }} />
                             </Link>
-                            <button onClick={() => handleDelete(product.productId)}>Delete</button>
+                            <button onClick={() => handleDelete(product.productId)}>
+                                <AiTwotoneDelete size={24} />
+                            </button>
                         </td>
                     </tr>
                 ))}
