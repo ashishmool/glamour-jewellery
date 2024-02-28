@@ -2,7 +2,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
 import { SearchBar } from "../SearchBar";
 
-import { AiOutlineHeart, AiOutlineUserAdd, AiOutlineUser, AiOutlinePlus, AiOutlineUnorderedList } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineUserAdd, AiOutlineUser, AiOutlinePlus, AiOutlineUnorderedList, AiOutlineLogin } from "react-icons/ai";
 
 import Logo from "../../assets/logo.svg";
 import styles from "./style.module.css";
@@ -26,10 +26,10 @@ export const Header = () => {
           {token ?
             <>
               {role === "Admin" && (
-                  <Link to="/add-product"><AiOutlinePlus/></Link>
+                  <Link to="/add-product">Add<AiOutlinePlus/></Link>
               )}
               {role === "Admin" && (
-                  <Link to="/list-product"> <AiOutlineUnorderedList/> </Link>
+                  <Link to="/list-product">List <AiOutlineUnorderedList/> </Link>
               )}
               {role === "Customer" && (
               <Link to="/favorites">
@@ -45,6 +45,9 @@ export const Header = () => {
             <>
               <Link to="/register">
                 <AiOutlineUserAdd />
+              </Link>
+              <Link to="/login">
+                <AiOutlineLogin />
               </Link>
             </>
           }

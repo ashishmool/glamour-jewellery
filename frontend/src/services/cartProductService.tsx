@@ -1,97 +1,68 @@
 import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { ProductsDataType } from "../interfaces/Products";
 import { requestErrorMessages } from "../constants/requestErrorMessages";
-import { getLocalStorageItem } from './../utils/localStorageActions';
 import { api } from "./api";
-
+import {getLocalStorageItem} from "../utils/localStorageActions";
 
 export const cartProductService = () => {
-
-  const userID = getLocalStorageItem("id");
-
   const { token } = useAuthContext();
-  const [productsOnCart, setProductsOnCart] = useState<ProductsDataType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const user = getLocalStorageItem("id") || 0; // Set userID to 0 if it's null
 
-
-  function addProductOnCart(productID: string | undefined) {
-
-    try {
-
-      api.post(`user/addToCart/userId=${userID}&productId=${productID}`, {}, {
-        headers: {
-          "Authorization": token,
-        }
-      });
-
-    } catch (error) { }
+  async function addProductOnCart(productID: string | undefined, userID: string) {
+    // setLoading(true);
+    // try {
+    //   await api.post(`/carts/`, { user: userID, products: [{ productId: productID, quantity: 1 }] }, {
+    //     headers: {
+    //       "Authorization": token,
+    //     }
+    //   });
+    // } catch (error) {
+    //   setError(error.response.data.message || requestErrorMessages.genericError);
+    // }
+    // setLoading(false);
   }
 
-
-  function removeProductFromCart(productID: string | undefined) {
-
-    try {
-
-      api.delete(`user/deleteFromCart/userId=${userID}&productId=${productID}`, {
-        headers: {
-          "Authorization": token,
-        }
-      });
-
-    } catch (error) { }
-
-  }
-
-
-  function removeAllProductsFromCart() {
-
-    try {
-
-      api.delete(`user/clearCart/userId=${userID}`, {
-        headers: {
-          "Authorization": token,
-        }
-      });
-
-    } catch (error) { }
-  }
-
-
-  async function fetchProductsOnCart() {
+  async function fetchProductsOnCart(userID: string) {
+    console.log('User ID:', user); // Log the userID
 
     setLoading(true);
-    setError(null);
-
     try {
-
-      const response: any = await api.get(`user/fetchCartItemsByUser/${userID}`, {
+      const response = await api.get(`/carts/${user}`, {
         headers: {
-          'Authorization': `Bearer ${token}`}
+          'Authorization': `Bearer ${token}`
+        }
       });
 
-      setProductsOnCart(response);
-      console.log('Fetched Cart Items:::',response);
-
-    } catch (error) {
-
+      console.log('Response Data::::',response.data);
       setLoading(false);
-      setError(requestErrorMessages.genericError);
-
+      return response.data;
+    } catch (error) {
+      setError(error.response.data.message || requestErrorMessages.genericError);
     }
-
     setLoading(false);
   }
 
+  async function removeProductFromCart(cartID: string | undefined) {
+    // setLoading(true);
+    // try {
+    //   await api.delete(`/carts/${cartID}`, {
+    //     headers: {
+    //       "Authorization": token,
+    //     }
+    //   });
+    // } catch (error) {
+    //   setError(error.response.data.message || requestErrorMessages.genericError);
+    // }
+    // setLoading(false);
+  }
 
-  return ({
+  return {
     addProductOnCart,
-    removeProductFromCart,
-    removeAllProductsFromCart,
     fetchProductsOnCart,
-    productsOnCart,
+    removeProductFromCart,
     loading,
     error
-  });
-}
+  };
+};

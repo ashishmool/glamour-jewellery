@@ -35,6 +35,7 @@ public class SystemUser implements UserDetails {
     @Column(name = "role", nullable = false)
     private String role;
 
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
             foreignKey = @ForeignKey(name = "FK_users_roles_userId"),

@@ -73,8 +73,7 @@ export const ProductDetails = () => {
             <p>{productDetails?.data.productDescription}</p>
           </div>
           <div className={styles.productImageContainer}>
-            {/*<img src={productDetails?.data.productImageUrl} alt={productDetails?.data.productName} />*/}
-            <img src={'data:image/png;base64,' + productDetails?.data.image} alt={productDetails?.data.productName} />
+            <img src={'data:image/png;base64,' + productDetails?.data?.image} alt={productDetails?.data.productName} />
 
           </div>
         </section>
