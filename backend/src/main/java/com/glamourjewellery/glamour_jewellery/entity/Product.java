@@ -42,5 +42,7 @@ public class Product {
     @Column(name = "availability", nullable = true)
     private Boolean productAvailability;
 
+    @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
+    private List<Wishlist> wishlists; // Corrected mappedBy attribute
 
 }

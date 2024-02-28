@@ -33,7 +33,7 @@ export const ProductDetailsActions = ({ productID, favoriteProducts, productsOnC
   const [isProductAlreadyFavorited, setIsProductAlreadyFavorited] = useState<boolean>(false);
   const [isProductAlreadyOnCart, setIsProductAlreadyOnCart] = useState<boolean>(false);
 
-
+  const userID = localStorage.getItem('id');
   function handleFavoriteActions() {
 
     if (!token) { navigate("/login"); return };
@@ -55,21 +55,21 @@ export const ProductDetailsActions = ({ productID, favoriteProducts, productsOnC
     if (isProductAlreadyOnCart) {
       removeProductFromCart(productID);
     } else {
-      addProductOnCart(productID);
+      addProductOnCart(productID, status);
     }
 
     setIsProductAlreadyOnCart((prevState) => !prevState);
   }
 
-
-  useEffect(() => {
-
-    favoriteProducts?.data.forEach((product) => {
-      product.productId?.toString() === productID &&
-        setIsProductAlreadyFavorited(true);
-    });
-
-  }, [favoriteProducts]);
+  //
+  // useEffect(() => {
+  //
+  //   favoriteProducts?.data.forEach((product) => {
+  //     product.productId?.toString() === productID &&
+  //       setIsProductAlreadyFavorited(true);
+  //   });
+  //
+  // }, [favoriteProducts]);
 
   useEffect(() => {
 

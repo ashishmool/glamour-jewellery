@@ -4,6 +4,7 @@ import { ProductsDataType } from '../interfaces/Products';
 import { requestErrorMessages } from "../constants/requestErrorMessages";
 import { getLocalStorageItem } from '../utils/localStorageActions';
 import { api } from './api';
+import {useParams} from "react-router-dom";
 
 export const favoriteProductService = () => {
   const userID = getLocalStorageItem("id");
@@ -12,9 +13,10 @@ export const favoriteProductService = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const { productId } = useParams();
   function favoriteProduct(productID: string | undefined) {
     try {
-      api.post(`/user/favorite/${userID}/${productID}`, {}, { // Updated endpoint
+      api.post(`/wishlist/save/${userID}/${productID}`, {}, { // Updated endpoint
         headers: {
           "Authorization": token,
         }
@@ -34,12 +36,18 @@ export const favoriteProductService = () => {
     }
   }
 
+  console.log('Setting Favorites:::',productId);
+
   async function fetchFavoriteProducts() {
     setLoading(true);
     setError(null);
     try {
-      const response: any = await api.get(`/user/favorite/${userID}`); // Updated endpoint
-      setFavoriteProducts(response);
+      const response: any = await api.get(`/wishlist/getByUserAndProductId/${userID}/${productId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`}}); // Updated endpoint
+
+      setFavoriteProducts(response.data);
+      console.log('Fetched UserProductFav:::',response.data);
     } catch (error) {
       setLoading(false);
       setError(requestErrorMessages.genericError);
