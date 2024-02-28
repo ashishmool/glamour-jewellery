@@ -46,6 +46,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(
                         "/add-product/**",
                         "/user/**",
+                        "/user/favorite/**",
                         "/addToCart/**",
                         "/profile",
                         "/profile/**",

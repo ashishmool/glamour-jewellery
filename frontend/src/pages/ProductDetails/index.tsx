@@ -73,7 +73,12 @@ export const ProductDetails = () => {
             <p>{productDetails?.data.productDescription}</p>
           </div>
           <div className={styles.productImageContainer}>
-            <img src={'data:image/png;base64,' + productDetails?.data?.image} alt={productDetails?.data.productName} />
+            {productDetails?.data?.image ? (
+                <img src={'data:image/png;base64,' + productDetails?.data?.image} alt={productDetails?.data.productName} />
+            ) : (
+                <p>No image available</p>
+            )}
+
 
           </div>
         </section>

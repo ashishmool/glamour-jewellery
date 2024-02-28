@@ -47,7 +47,9 @@ export const Profile = () => {
           <ErrorMessage message={error} className="text-center" />
           :
           <div className={styles.greetingsContainer}>
-            <h2>Hi, {userData?.data.username}</h2>
+            <h2>Hi,
+              {userData?.data.username}
+            </h2>
           </div>
         }
         <div className={styles.profileActionsContainer}>

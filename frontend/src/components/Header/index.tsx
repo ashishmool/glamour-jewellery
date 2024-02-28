@@ -26,10 +26,10 @@ export const Header = () => {
           {token ?
             <>
               {role === "Admin" && (
-                  <Link to="/add-product">Add<AiOutlinePlus/></Link>
+                  <Link to="/add-product"><AiOutlinePlus/></Link>
               )}
               {role === "Admin" && (
-                  <Link to="/list-product">List <AiOutlineUnorderedList/> </Link>
+                  <Link to="/list-product"><AiOutlineUnorderedList/> </Link>
               )}
               {role === "Customer" && (
               <Link to="/favorites">
