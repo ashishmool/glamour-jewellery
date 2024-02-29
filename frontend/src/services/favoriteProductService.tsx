@@ -46,8 +46,8 @@ export const favoriteProductService = () => {
         headers: {
           'Authorization': `Bearer ${token}`}}); // Updated endpoint
 
-      setFavoriteProducts(response.data);
-      console.log('Fetched UserProductFav:::',response.data);
+      setFavoriteProducts(response.data[0]);
+      console.log('fetchFavoriteProducts():::',response.data[0]);
     } catch (error) {
       setLoading(false);
       setError(requestErrorMessages.genericError);
